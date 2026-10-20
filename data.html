@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Table</title>
+</head>
+<body>
+
+    <h2>Users Data</h2>
+
+    <input type="text" id="search" placeholder="Search...">
+    <br><br>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>City</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+        </tbody>
+    </table>
+
+    <script>
+        const users = [
+            { name: "Youssef", age: 21, city: "Cairo" },
+            { name: "Ali", age: 22, city: "Giza" },
+            { name: "Sara", age: 20, city: "Alex" }
+        ];
+
+        const tbody = document.querySelector("#tbody");
+        const searchInput = document.querySelector("#search");
+
+        function showTable(data) {
+            tbody.innerHTML = "";
+            for (let i = 0; i < data.length; i++) {
+                const tr = document.createElement("tr");
+                tr.innerHTML = "<td>" + data[i].name + "</td><td>" + data[i].age + "</td><td>" + data[i].city + "</td>";
+                tbody.appendChild(tr);
+            }
+        }
+
+        showTable(users);
+
+        searchInput.addEventListener("input", function(e) {
+            const text = e.target.value.toLowerCase();
+            const filtered = users.filter(function(u) {
+                return u.name.toLowerCase().includes(text) || u.city.toLowerCase().includes(text);
+            });
+            showTable(filtered);
+        });
+    </script>
+</body>
+</html>

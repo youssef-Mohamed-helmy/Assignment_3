@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
+</head>
+<body>
+
+    <h2>Registration Form</h2>
+
+    <form id="myForm">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name"><br>
+        <span id="nameError" style="color: red;"></span><br><br>
+
+        <label for="email">Email:</label><br>
+        <input type="text" id="email"><br>
+        <span id="emailError" style="color: red;"></span><br><br>
+
+        <label for="password">Password:</label><br>
+        <input type="password" id="password"><br>
+        <span id="passError" style="color: red;"></span><br><br>
+
+        <label for="age">Age:</label><br>
+        <input type="text" id="age"><br>
+        <span id="ageError" style="color: red;"></span><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        const form = document.querySelector("#myForm");
+
+        form.addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const name = document.querySelector("#name").value;
+            const email = document.querySelector("#email").value;
+            const password = document.querySelector("#password").value;
+            const age = document.querySelector("#age").value;
+
+            document.querySelector("#nameError").textContent = "";
+            document.querySelector("#emailError").textContent = "";
+            document.querySelector("#passError").textContent = "";
+            document.querySelector("#ageError").textContent = "";
+
+            let check = true;
+
+            if (name === "") {
+                document.querySelector("#nameError").textContent = "Name is required";
+                check = false;
+            }
+
+            if (email === "" || !email.includes("@")) {
+                document.querySelector("#emailError").textContent = "Enter a valid email";
+                check = false;
+            }
+
+            if (password.length < 6) {
+                document.querySelector("#passError").textContent = "Password must be at least 6 characters";
+                check = false;
+            }
+
+            if (age === "" || isNaN(age)) {
+                document.querySelector("#ageError").textContent = "Enter a valid number for age";
+                check = false;
+            }
+
+            if (check) {
+                alert("Done successfully");
+                form.reset();
+            }
+        });
+    </script>
+</body>
+</html>
